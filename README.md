@@ -9,6 +9,8 @@ The API is built on the entity framework where it makes use of repositories. MVC
 ![design image](https://github.com/jordyvanraalte/data-exchange-healthcare-example/blob/main/images/design.png)
 The design of the system allows nursing homes to request patient data from hospitals through an API. When a nursing home makes a request, the hospital creates a file containing the requested data and sends it to the API. The API saves the file as a PatientData object and generates a unique "key", which is sent back to the hospital. The hospital then shares the key with the nursing home, which can use it to access the file through the API.
 
+Since the application is one-time token-based, there is only a small window for a malicious actor to get access to the personal files. If they still managed to obtain the token, the file is no longer accessible if the token is used. The objects saved in the database does not have any reference to personal data. 
+
 To ensure the security and integrity of the system, the API implements several validation measures, including signature detection and extension checking. When a file is uploaded or downloaded, the API logs the IP address of the actor, the filename, file hash, and timestamp of the request. This allows for easy tracking and auditing of file usage. Additionally, the API checks the hashes of uploaded files to ensure their integrity. Finally, to protect patient privacy, the system deletes files from the server after they have been downloaded by the nursing home
 
 ## Getting started
