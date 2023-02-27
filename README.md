@@ -1,18 +1,13 @@
 # Patient Data Exchange System Example
-This is an .NET Core REST API built in C# that allows heatlhcare organisations to exchange patient data (in form of files) through an API. The API is designed with security in mind. 
-The system includes validation checks for file uploads including checking file signatures and extensions. 
-Moreover, the API contains error handeling and logging capabilities to keep track of all data exchanges between the parties.
-To ensure the intergrity of the files, the hashes of the files are checked before passing them down to the other healthcare organisations.
-The patient file is deleted after its download.
+This is a .NET Core REST API built in C# that enables healthcare organizations to exchange patient data via an API. The system includes advanced validation checks for uploaded files, such as checking file signatures and extensions. In addition, the API features comprehensive error handling and logging capabilities to facilitate tracking of all data exchanges between the involved parties.
+
+To ensure the security and integrity of the files, the API performs a hash check on the files before they are sent to other healthcare organizations. This guarantees that the data being shared is accurate and has not been tampered with. For further security, the patient file is automatically deleted from the server after being downloaded, protecting the patient's sensitive data.
 
 ## Design
 ![design image](https://github.com/jordyvanraalte/data-exchange-healthcare-example/blob/main/images/design.png)
-In the design there is an example between a nursing home and a hospital. The nursing home requests patient data from the hospital.
-The hospital creates a file and sends it to the API. The API saves it through a PatientData and sends a "key" back to the hospital.
-The hospital then sends the key to the nursing home. The nursing home can access the file through the key by requesting the file through the API.
+The design of the system allows nursing homes to request patient data from hospitals through an API. When a nursing home makes a request, the hospital creates a file containing the requested data and sends it to the API. The API saves the file as a PatientData object and generates a unique "key", which is sent back to the hospital. The hospital then shares the key with the nursing home, which can use it to access the file through the API.
 
-The API has validion in form of signature detection and extension checking. Logging is done on upload and download by logging the ip address of the actor, the filename, file hash and timestamp of the request.
-The API ensures the integrity of the file by checking the hashes. The file is deleted after download. 
+To ensure the security and integrity of the system, the API implements several validation measures, including signature detection and extension checking. When a file is uploaded or downloaded, the API logs the IP address of the actor, the filename, file hash, and timestamp of the request. This allows for easy tracking and auditing of file usage. Additionally, the API checks the hashes of uploaded files to ensure their integrity. Finally, to protect patient privacy, the system deletes files from the server after they have been downloaded by the nursing home
 
 ## Reflection
 Although I completed the project within the given four hours, I recognize that there are some areas for improvement in terms of the user experience. For example, the current implementation of the file download feature deletes the file after download, which might not be ideal for users who want to download the same file multiple times. To address this, I could consider introducing a remove timer that would allow the file to be removed only after a certain period of time has passed.
