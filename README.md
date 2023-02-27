@@ -1,7 +1,9 @@
 # Patient Data Exchange System Example
 This is a .NET Core REST API built in C# that enables healthcare organizations to exchange patient data via an API. The system includes advanced validation checks for uploaded files, such as checking file signatures and extensions. In addition, the API features comprehensive error handling and logging capabilities to facilitate tracking of all data exchanges between the involved parties. The files are saved on disk and objects are stored in the SQLite database.
 
-To ensure the security and integrity of the files, the API performs a hash check on the files before they are sent to other healthcare organizations. This guarantees that the data being shared is accurate and has not been tampered with. For further security, the patient file is automatically deleted from the server after being downloaded, protecting the patient's sensitive data.
+No personal data is saved in the API. The files are saved until the process is fulfilled, meaning they will be deleted after downloading, protecting the patient's sensitive data. The objects that are stored in the database only contains references to that file. This is to ensure the confidentially of the data. The API regulates one-time token-based access to data, protecting it from storign it permantly. 
+
+The API is built on the entity framework where it makes use of repositories. MVC is used to control the dataflow. 
 
 ## Design
 ![design image](https://github.com/jordyvanraalte/data-exchange-healthcare-example/blob/main/images/design.png)
